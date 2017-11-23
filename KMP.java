@@ -10,14 +10,29 @@ import java.io.FileNotFoundException;
 
 public class KMP {
     private static String pattern;
-
    
     public KMP(String pattern){  
-
+    	this.pattern = pattern;
     }
     
-    public static int search(String txt){  
-		return 0;
+    public static int search(String txt){
+    	int iterator = 0;
+
+    	for(int i = 0; i < txt.length(); i++){
+    		if(pattern.charAt(iterator) == txt.charAt(i)){
+    			iterator++;
+    			if(iterator == 4){
+    				// Return the first characters index
+    				return i - 3;
+    			}
+    		}else{
+    			// This is not the next character in the pattern,
+    			// so we need to restart at the begining of the pattern.
+    			iterator = 0;
+    		}
+    	}
+    	// Gone through the entire file without finding the gene.
+    	return txt.length();
     }
     
     
